@@ -1,19 +1,24 @@
 class FilmChecker {
+  String name;
   int age;
   bool hasParentalConsent;
-  List<int> movieAgeRating;
+  int movieAgeRating;
 
-  FilmChecker(this.age, this.hasParentalConsent, {this.movieAgeRating = const [12, 16, 18]});
+  FilmChecker(this.name, this.age, this.hasParentalConsent, this.movieAgeRating);
 
   String canWatchFilm() {
-    if (age >= movieAgeRating || hasParentalConsent) {
-      return "Can watch film";
+    if (age >= movieAgeRating || (hasParentalConsent && age >= movieAgeRating - 2)) {
+      return "$name can watch film";
     } else {
-      return "Can't watch film";
+      return "$name can't watch film";
     } 
   }
 }
 
 void main() {
-  var John = FilmChecker(15, true, 15);
+  var user1 = FilmChecker("John", 15, true, 16);
+  print (user1.canWatchFilm());
+
+  var user2 = FilmChecker("Anna", 13, false, 16);
+  print(user2.canWatchFilm());
 }
